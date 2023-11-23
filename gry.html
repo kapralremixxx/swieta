@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wybierz grę świąteczną</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('gryback.jpg') center/cover no-repeat; /* Dodaj tło */
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h2 {
+            color: #dc3545;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Przezroczyste tło formularza */
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px #aaaaaa;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #495057;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #dc3545;
+            color: #ffffff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/javascript" src="snow.js">
+    </script>
+
+
+    <form action="gra1.html" method="get">
+        <label for="gry">Wybierz grę:</label>
+        <select id="gry" name="gry">
+            <option value="gra1">Swiąteczny pojedynek!</option>
+            <!-- Dodaj więcej opcji gier świątecznych, jeśli chcesz -->
+        </select>
+
+        <br>
+
+        <input type="submit" value="Rozpocznij grę">
+    </form>
+
+</body>
+</html>

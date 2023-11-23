@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona Powitalna</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('witaj.jpg'); /* ścieżka do obrazu */
+            background-size: cover; /* Obraz będzie zajmować całe tło */
+            color: #fff; /* Biały kolor tekstu na tle obrazu */
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            padding: 3em;
+        }
+        #startButton {
+            display: inline-block;
+            padding: 1em 2em;
+            font-size: 1.2em;
+            background-color: #c00; /* czerwony kolor przycisku Start */
+            color: #fff; /* biały kolor tekstu przycisku */
+            border-radius: 15px; /* bardziej zaokrąglone rogi przycisku */
+            text-decoration: none;
+        }
+        #changingText {
+            font-size: 2em;
+            margin-top: 20px; /* Dodatkowy odstęp od przycisku */
+            animation-name: colorChange;
+            animation-duration: 5s;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes colorChange {
+            0% { color: #fff; }
+            50% { color: #ffcc00; }
+            100% { color: #fff; }
+        }
+    </style>
+    <script>
+        // Funkcja do generowania losowego koloru w formie heksadecymalnej
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // Funkcja do zmiany koloru tekstu co pewien czas
+        function changeTextColor() {
+            setInterval(function() {
+                document.getElementById('changingText').style.color = getRandomColor();
+            }, 1000); // Zmiana co 1000 ms (1 sekunda)
+        }
+    </script>
+
+<script type="text/javascript" src="snow.js">
+    </script>
+
+</head>
+<body onload="changeTextColor()">
+    <h1>Wesołe Święta!</h1>
+    <p id="changingText">Witaj na stronie powitalnej. Kliknij przycisk "Start" i zobacz wszystkie świąteczne atrakcje!</p>
+    <a href="index.html" id="startButton">Happy New Year!</a>
+</body>
+</html>

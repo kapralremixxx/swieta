@@ -1,0 +1,313 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Anatolii" content="Swiateczny pojedynek">
+    <title>Swiąteczny pojedynek!</title>
+    <style>
+        body {
+            /* sciezka do pliku z tlem */
+            background-image: url(obrazki/gra1.jpg) ;
+
+            /* pozycja obrazka w pionie i poziomie */
+            background-position: center center;
+
+            /* co zrobic jesli ekran komputera jest wiekszy niz obrazek */
+            background-repeat:  no-repeat;
+
+            /* co sie dzieje z obrazkiem jesli rozszerzamy okienko przegladarki */
+            background-attachment: fixed;
+
+            /* rozmiar obrazka */
+            background-size: cover;
+
+            /* kolor jaki zostanie wyswietlony pod obrazkiem czyli zanim sie pokaze w przegladarce */
+            background-color: #999;
+        }
+
+        h1, input {
+            /* polozenie tekstu wewnatrz elementu */
+            text-align: center;
+        }
+        
+        #dziennikZdarzen {
+            /* pozycja elementu wzgledem elementu nadrzednego */
+            position: absolute;
+
+            /* odleglosc elementu do dolnej krawedzi strony */
+            bottom: 10px;
+
+            /* odleglosc elementu od lewej krawedzi strony */
+            left: 10px;
+
+            /* ramka elementu, nie chcemy jej wiec dajemy zero */
+            border: 0px;
+
+            /* czy pokazac 'uchwyt' do powiekszania elementu przez uzytkownika */
+            resize: none;
+
+            /* czy pokazac scroll po prawej jesli tekst bedzie zbyt dlugi */
+            overflow:hidden;
+        }
+        
+        .kolorowyTekst {
+            /* kolor tekstu */
+            color: brown;
+        }
+
+        img {
+            /* dodatkowy filtr dla elementu, tutaj chcemy zeby byl prawie czarnobialy (usuwamy kolory) */
+            filter: grayscale(50%);
+
+            /* margines (odstep) elementu od elementu po lewej */
+            margin-left:auto;
+
+            /* margines (odstep) elementu od elementu po prawej */
+            margin-right:auto;
+
+            /* okresla czy dany element jest traktowany jako blok czy tez tak zwany 'inline' */
+            display: block;
+        }
+
+        img.active:hover {
+            /* dodatkowy filtr elementu, teraz chcemy zeby byl kolorowy */
+            filter: grayscale(0%);
+        }
+
+        img.inactive {
+            /* dodatkowy filtr elementu, teraz chcemy zeby byl czarnobialy */
+            filter: grayscale(100%);
+        }
+    </style>
+</head>
+<body>
+    <!-- podajemy nazwe klasy CSS ktorej styl chcemy zastosowac dla elementu H1 -->
+    <h1 id="tytul" class="kolorowyTekst">Swiąteczny pojedynek</h1>
+    <!-- dzieki zastosowaniu obrazka, filtrow i pseudoklasy hover z jednego obrazka mozemy zrobic ladny przycisk -->
+    <img id="przyciskStart" class="active" src="obrazki/start.png" onclick="RozpocznijGre()">
+    <!-- styl CSS mozemy tez ustawic na konkretnym elemencie za pomoca atrybutu 'style' -->
+    <textarea id="dziennikZdarzen" class="kolorowyTekst" style="background-color:rgba(0,0,0,0);" cols="100" rows="20" readonly></textarea>
+    <script>
+        // 1. Wyswietlenie okienka Graczom
+        alert('Witaj w grze Swiąteczny pojedynek! Aby rozpocząć kliknij w przycisk "START"');
+        // 2. Wywolanie funkcji logujacej komunikat dla Graczy
+        Zanotuj('Po wyświetleniu napisu "Pojedynek!" Gracze naciskają swoje klawisze. Kto pierwszy ten lepszy!');
+        Zanotuj('Klawisz Gracza nr 1: q');
+        Zanotuj('Klawisz Gracza nr 2: p');
+        Zanotuj('------------------------');
+        Zanotuj('Aby rozpocząć grę naciśnij "START"');
+        Zanotuj('------------------------');
+
+        // 3. Zdefiniowanie zmiennych Gry
+        var punktyGracz1;
+        var punktyGracz2;
+        var czasRundy;
+        var licznikNacisniecGracz1;
+        var licznikNacisniecGracz2;
+        var limitNacisniec;
+        var liczbaRund;
+        var minimalnyCzasRundy;
+        var czyPojedynekTrwa; 
+        var przyciskGracz1;
+        var przyciskGracz2;
+
+        // 4. Funkcje i logika Gry
+
+        // Funkcja sluzy do rozpoczynania nowej gry
+        function RozpocznijGre() {
+            // sprawdzamy czy przycisk jest aktywny, jezeli nie to wychodzimy
+            if(!document.getElementById('przyciskStart').classList.contains('active')) {
+                return;
+            }
+            WylaczPrzyciskStart();
+            Dzwiek('start');
+            Zanotuj('Rozpoczynamy Grę!');
+            // ustawienie poczatkowych wartosci zmiennych
+            punktyGracz1 = 0;
+            punktyGracz2 = 0;
+            licznikNacisniecGracz1 = 0;
+            licznikNacisniecGracz2 = 0;
+            liczbaRund = 3;
+            limitNacisniec = 2 * liczbaRund;
+            minimalnyCzasRundy = 5;
+            przyciskGracz1 = 81; // klawisz q
+            przyciskGracz2 = 80; // klawisz p
+            RozpocznijRunde();
+        }
+
+        // Funkcja ktora losuje czas rundy uwzgledniajac 'minimalnyCzasRundy'
+        // oraz losowy czas od 1 do 5 sekund
+        function WylosujCzasRundy(minimalnyCzasRundy) {
+            var czasLosowy = Math.floor(1 + Math.random() * 5);
+            return minimalnyCzasRundy + czasLosowy;
+        }
+
+        // Funkcja ktora loguje wiadomosc podczas dzialania gry.
+        // Wiadomosc jest wyswietlana w konsoli oraz na okienku tekstowym o nazwie 'dziennikZdarzen'.
+        function Zanotuj(wiadomosc) {
+            console.log(wiadomosc);
+            document.getElementById('dziennikZdarzen').value += wiadomosc + '\r\n';
+            document.getElementById('dziennikZdarzen').scrollTop = document.getElementById('dziennikZdarzen').scrollHeight;
+        }
+
+        // Funkcja ktora rozpoczyna kolejna runde
+        // Ustawia stoper na czasRundy
+        function RozpocznijRunde() {
+            czyPojedynekTrwa = false;
+            czasRundy = WylosujCzasRundy(minimalnyCzasRundy);
+            Zanotuj('------------------------');
+            Zanotuj('Rozpoczęcie rundy. Poczekaj na Pojedynek...');
+
+            // poniewaz czasRundy jest w sekundach a funkcja setTimeout przyjmuje milisekundy
+            window.setTimeout(Pojedynek, czasRundy * 800); 
+        }
+
+        // Funkcja ktora oznajmia Graczom ze wlasnie rozpoczal sie ich pojedynek
+        function Pojedynek() {
+            czyPojedynekTrwa = true;
+            Dzwiek('pojedynek');
+            Zanotuj('Pojedynek!');
+        }
+
+        // Funkcja obslugujaca logike naciskania klawisza przez Graczy
+        function NacisnietoPrzycisk(przycisk) {
+            if(przycisk.keyCode == przyciskGracz1) {
+                
+                licznikNacisniecGracz1++;
+                if(czyPojedynekTrwa) {
+                    punktyGracz1++;
+                    Zanotuj('Klawisz nacisnął Gracz nr 1. Punkty: ' + punktyGracz1);
+                    KoniecRundy();
+                }
+
+            }else if(przycisk.keyCode == przyciskGracz2) {
+
+                licznikNacisniecGracz2++;
+                if(czyPojedynekTrwa) {
+                    punktyGracz2++;
+                    Zanotuj('Klawisz nacisnął Gracz nr 2. Punkty: ' + punktyGracz2);
+                    KoniecRundy();
+                }
+            }
+        }
+
+        // Funkcja z logika zakonczenia rundy
+        function KoniecRundy() {
+            czyPojedynekTrwa = false;
+
+            if(CzyKtosOszukiwal()) {
+                Zakonczenie();
+                return;
+            }
+
+            if(CzyKoniecGry()) {
+                Zakonczenie();
+                return;
+            }
+
+            RozpocznijRunde();
+        }
+
+        // Funkcja sprawdzajaca czy ktorys z graczy nie oszukiwal
+        function CzyKtosOszukiwal() {
+            
+            if(licznikNacisniecGracz1 > limitNacisniec && licznikNacisniecGracz2 > limitNacisniec){
+                Oszust('Obaj Gracze oszukiwali. Nikt nie wygrywa!');
+                return true;
+            }
+            
+            if(licznikNacisniecGracz1 > limitNacisniec) {
+                Oszust('Gracz nr 1 oszukiwał. Wygrywa Gracz nr 2!');
+                return true;
+            }
+            
+            if(licznikNacisniecGracz2 > limitNacisniec) {
+                Oszust('Gracz nr 2 oszukiwał. Wygrywa Gracz nr 1!');
+                return true;
+            }
+
+            // nie znaleziono oszusta
+            return false;
+        }
+
+        // Funkcja sprawdzajaca czy ktorys z graczy wygral
+        function CzyKoniecGry() {
+            
+            if(punktyGracz1 >= liczbaRund && punktyGracz2 >= liczbaRund) {
+                Zwyciezca('Nieoczekiwany remis!');
+                return true;
+            }
+
+            if(punktyGracz1 >= liczbaRund) {
+                Zwyciezca('Gracz nr 1 zdobył punktów: ' + punktyGracz1 + '. Wygrywa Gracz nr 1!');
+                return true;
+            }
+
+            if(punktyGracz2 >= liczbaRund) {
+                Zwyciezca('Gracz nr 2 zdobył punktów: ' + punktyGracz2 + '. Wygrywa Gracz nr 2!');
+                return true;
+            }
+
+            // gra dalej trwa
+            return false;
+        }
+
+        // Funkcja wyswietlajaca komunikat o znalezionym oszuscie
+        function Oszust(komunikat) {
+            Dzwiek('oszust');
+            Zanotuj('------------------------');
+            Zanotuj(komunikat);
+        }
+
+        // Funkcja wyswietlajaca komunikat o znalezionym zwyciezcy
+        function Zwyciezca(komunikat) {
+            Dzwiek('zwyciezca');
+            Zanotuj('------------------------');
+            Zanotuj(komunikat);
+        }
+
+        // Funkcja odtwarzajaca plik z efektem dzwiekowym z katalogu 'dzwieki'
+        function Dzwiek(dzwiek, isBackground) {
+            var audio = new Audio('dzwieki/' + dzwiek + '.mp3');
+
+            // dla dzwieku tla chcemy odtwarzac w kolko i znacznie ciszej niz normalne dzwieki
+            // do srodka instrukcji IF wejdziemy tylko jezeli podany parametr jest 'true'
+            // w przeciwnym wypadku dzwiek bedzie odtworzony normalnie, czyli tylko raz i z normalna glosnoscia
+            if(isBackground) {
+                audio.loop=true;
+                audio.volume=0.3;
+            }
+
+            audio.play();
+        }
+
+        // Funkcja wylaczajaca przycisk START
+        function WylaczPrzyciskStart() {
+            document.getElementById('przyciskStart').classList.remove('active');
+            document.getElementById('przyciskStart').classList.add('inactive');
+            document.getElementById('dziennikZdarzen').focus(); 
+        }
+
+        // Funkcja wyswietlajaca komunikat o zakonczeniu gry
+        function Zakonczenie() {
+            Zanotuj('------------------------');
+            Zanotuj('Koniec gry Swiąteczny pojedynek!');
+            Zanotuj('Dziękujemy za grę :)');
+            Zanotuj('------------------------');
+        }
+
+        // Rejestracja nasluchiwania na nacisniecie klawisza
+        // Mowimy przygladarce ze jestesmy zainteresowani zdarzeniem keydown
+        document.addEventListener('keydown', NacisnietoPrzycisk);
+        
+        // Wlaczamy muzyczke w tle
+        Dzwiek('western', true);
+    </script>
+
+<script type="text/javascript" src="snow.js">
+</script>
+
+</body>
+</html>

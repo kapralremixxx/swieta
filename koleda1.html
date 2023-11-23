@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kolęda 1</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff; /* białe tło */
+            color: #c00; /* czerwony kolor tekstu */
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: rgb(255, 255, 255); /* czerwone tło nagłówka */
+            padding: 1em;
+            text-align: center;
+        }
+        section {
+            padding: 1em;
+            display: flex;
+            flex-direction: row; /* Ustawienie tekstu i odtwarzacza obok siebie */
+            justify-content: space-between; /* Odstęp między tekstem a odtwarzaczem */
+            max-width: 800px; /* Maksymalna szerokość sekcji */
+            margin: 0 auto; /* Wyśrodkowanie sekcji */
+        }
+        footer {
+            background-color: #c00; /* czerwone tło stopki */
+            padding: 1em;
+            text-align: center;
+            color: #fff; /* biały kolor tekstu w stopce */
+        }
+        iframe {
+            width: 45%; /* Szerokość odtwarzacza YouTube */
+            height: 315px; /* Wysokość odtwarzacza YouTube */
+        }
+        audio {
+            width: 45%; /* Szerokość odtwarzacza audio */
+            margin-top: 20px;
+        }
+        .inner-text {
+            white-space: nowrap; /* Zapobiega zawijaniu tekstu na nową linię */
+            width: 45%; /* Szerokość tekstu */
+            margin-right: 20px; /* Dodatkowy odstęp od odtwarzacza */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bóg się rodzi!</h1>
+    </header>
+    <section>
+        <div class="inner-text">
+            Bóg się rodzi, moc truchleje,<br />
+            Pan niebiosów obnażony!<br />
+            Ogień krzepnie, blask ciemnieje,<br />
+            Ma granice Nieskończony.<br />
+            Wzgardzony, okryty chwałą,<br />
+            Śmiertelny Król nad wiekami!<br />
+            A Słowo Ciałem się stało<br />
+            I mieszkało między nami.<br />
+            <br />
+            Cóż  masz niebo nad ziemiany?<br />
+            Bóg porzucił szczęście swoje,<br />
+            Wszedł między lud ukochany,<br />
+            Dzieląc z nim trudy i znoje.<br />
+            Niemało cierpiał, niemało,<br />
+            Żeśmy byli winni sami,<br />
+            A Słowo...<br />
+            <br />
+            W nędznej szopie urodzony,<br />
+            Żłób Mu za kolebkę dano!<br />
+            Cóż jest czym był otoczony?<br />
+            Bydło, pasterze i siano.<br />
+            Ubodzy, was to spotkało<br />
+            Witać Go przed bogaczami!<br />
+            A Słowo...<br />
+            <br />
+            Potem królowie widziani<br />
+            Cisną się między prostotą,<br />
+            Niosąc dary Panu w dani:<br />
+            Mirrę, kadzidło i złoto.<br />
+            Bóstwo to razem zmieszało<br />
+            Z wieśniaczymi ofiarami.<br />
+            A Słowo...<br />
+            <br />
+            Podnieś rękę, Boże Dziecię,<br />
+            Błogosław Ojczyznę miłą!<br />
+            W dobrych radach, w dobrym bycie<br />
+            Wspieraj jej siłę swą siłą.<br />
+            Dom nasz i majętność całą,<br />
+            I wszystkie wioski z miastami.<br />
+            A Słowo...
+        </div>
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/hDQte0AQnPk" frameborder="0" allowfullscreen></iframe>
+    </section>
+    <section>
+        <h2>Nagranie Audio</h2>
+
+        <audio controls>
+            <source src="Bóg się rodzi.mp3" type="audio/mp3">
+            Twoja przeglądarka nie obsługuje elementu audio.
+        </audio>
+    </section>
+    <footer>
+        <p>© 2023 Wesołe Święta</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kolęda 2</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff; /* białe tło */
+            color: #c00; /* czerwony kolor tekstu */
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: rgb(255, 255, 255); /* czerwone tło nagłówka */
+            padding: 1em;
+            text-align: center;
+        }
+        section {
+            padding: 1em;
+            display: flex;
+            flex-wrap: wrap; /* Dodanie zawijania do nowej linii dla elementów */
+            justify-content: center; /* Wyśrodkowanie elementów */
+            max-width: 800px; /* Maksymalna szerokość sekcji */
+            margin: 0 auto; /* Wyśrodkowanie sekcji */
+        }
+        .inner-text {
+            white-space: nowrap; /* Zapobiega zawijaniu tekstu na nową linię */
+            width: 100%; /* Szerokość tekstu */
+            margin-right: 20px; /* Dodatkowy odstęp od odtwarzacza */
+            box-sizing: border-box; /* Zapobiega przekraczaniu szerokości sekcji */
+        }
+        iframe {
+            width: 100%; /* Pełna szerokość odtwarzacza YouTube */
+            height: 315px; /* Wysokość odtwarzacza YouTube */
+            margin-top: 20px; /* Dodatkowy odstęp od tekstu */
+            box-sizing: border-box; /* Zapobiega przekraczaniu szerokości sekcji */
+        }
+        audio {
+            width: 100%; /* Pełna szerokość odtwarzacza audio */
+            margin-top: 20px;
+            box-sizing: border-box; /* Zapobiega przekraczaniu szerokości sekcji */
+        }
+        footer {
+            background-color: #c00; /* czerwone tło stopki */
+            padding: 1em;
+            text-align: center;
+            color: #fff; /* biały kolor tekstu w stopce */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Wśród nocnej ciszy</h1>
+    </header>
+    <section>
+        <div class="inner-text">
+            Wśród nocnej ciszy głos się rozchodzi<br />
+            Wstańcie, pasterze, Bóg się wam rodzi!<br />
+            Czym prędzej się wybierajcie<br />
+            Do Betlejem pospieszajcie<br />
+            Przywitać Pana<br />
+            Poszli, znaleźli Dzieciątko w żłobie<br />
+            Z wszystkimi znaki danymi sobie<br />
+            Jako Bogu cześć Mu dali<br />
+            A witając zawołali<br />
+            Z wielkiej radości<br />
+            Z wielkiej radości<br />
+            Jako Bogu cześć Mu dali<br />
+            A witając zawołali<br />
+            Z wielkiej radości<br />
+            Z wielkiej radości<br />
+            Ach, witaj Zbawco z dawna żądany<br />
+            Cztery tysiące lat wyglądany<br />
+            Na Ciebie króle, prorocy<br />
+            Czekali, a Tyś tej nocy<br />
+            Nam się objawił<br />
+            Nam się objawił<br />
+            Na Ciebie króle, prorocy<br />
+            Czekali, a Tyś tej nocy<br />
+            Nam się objawił<br />
+            Nam się objawił
+        </div>
+        <iframe src="https://www.youtube.com/watch?v=k45AJhW-Fu0" frameborder="0" allowfullscreen></iframe>
+    </section>
+    <section>
+        <h2>Nagranie Audio</h2>
+
+        <audio controls>
+            <source src="cisza.mp3" type="audio/mp3">
+        </audio>
+    </section>
+    <footer>
+        <p>© 2023 Wesołe Święta</p>
+    </footer>
+</body>
+</html>

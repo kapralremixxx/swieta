@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Świąteczna Krzyżówka</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      background-color: #f0f0f0; /* Jasny kolor tła */
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      color: #e44d26; /* Czerwony kolor nagłówka */
+      margin-bottom: 20px;
+    }
+    #crossword {
+      display: grid;
+      grid-template-columns: repeat(15, 40px);
+      grid-template-rows: repeat(12, 40px);
+      gap: 2px;
+      margin: 20px auto;
+      border: 2px solid #ccc; /* Szary kolor obramowania */
+      background-color: #fff;
+    }
+    .cell {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #bbb; /* Kolor obramowania komórki */
+      font-size: 14px;
+    }
+    .numbered-cell {
+      background-color: #eee;
+    }
+    .number-label {
+      font-size: 12px;
+      color: #444; /* Ciemnoszary kolor numeru */
+    }
+    .clues {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+    .clue {
+      width: 45%;
+      background-color: #e44d26; /* Czerwony kolor tła wskazówki */
+      color: #fff; /* Biały kolor tekstu wskazówki */
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    input {
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      font-size: 14px;
+      border: none;
+      border-bottom: 1px solid #ddd;
+      outline: none;
+    }
+    #result {
+      font-size: 18px;
+      margin-top: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Świąteczna Krzyżówka</h1>
+
+<div id="crossword"></div>
+<div class="clues">
+  <div class="clue">
+    <h3>Across</h3>
+    <p>1. Żywioł ognia i symbol świątecznych świec (4 litery)</p>
+    <p>4. Tradycyjne danie podawane w Wigilię (7 litery)</p>
+    <p>6. Główny bohater świąt dla dzieci (7 litery)</p>
+    <p>8. Symbol świąt Bożego Narodzenia, drzewko (5 litery)</p>
+    <p>10. Świąteczny napój z jajek, mleka i rumu (4 litery)</p>
+    <p>12. Okres przedświąteczny, czas oczekiwania na Boże Narodzenie (6 litery)</p>
+  </div>
+  <div class="clue">
+    <h3>Down</h3>
+    <p>2. Tradycyjne polskie ciasto świąteczne (7 litery)</p>
+    <p>3. Czerwony nos u renifera Rudolfa to efekt spożycia (5 litery)</p>
+    <p>5. Świąteczny prezent, zazwyczaj pakowany w kolorowy papier (4 litery)</p>
+    <p>7. Znane słowo kojarzone ze świętami, oznacza radość i szczerą życzliwość (6 litery)</p>
+    <p>9. Święta Bożego Narodzenia obchodzone są w Polsce 24 i 25 (6 litery)</p>
+    <p>11. Najważniejsza gwiazda świąt, pojawiająca się w nocy z 24 na 25 grudnia (5 litery)</p>
+  </div>
+</div>
+
+<div class="answer-container">
+  <label for="answerInput">Wpisz odpowiedź:</label>
+  <input type="text" id="answerInput">
+</div>
+
+<p id="result"></p>
+
+<script>
+  const crosswordData = {
+    across: [
+      { number: 1, clue: "Żywioł ognia i symbol świątecznych świec", answer: "ogień", length: 4, row: 0, col: 0 },
+      { number: 4, clue: "Tradycyjne danie podawane w Wigilię", answer: "barszcz", length: 7, row: 3, col: 0 },
+      { number: 6, clue: "Główny bohater świąt dla dzieci", answer: "mikołaj", length: 7, row: 5, col: 0 },
+      { number: 8, clue: "Symbol świąt Bożego Narodzenia, drzewko", answer: "choinka", length: 7, row: 7, col: 0 },
+      { number: 10, clue: "Świąteczny napój z jajek, mleka i rumu", answer: "nogogog", length: 7, row: 9, col: 0 },
+      { number: 12, clue: "Okres przedświąteczny, czas oczekiwania na Boże Narodzenie", answer: "adwent", length: 6, row: 11, col: 0 }
+    ],
+    down: [
+      { number: 2, clue: "Tradycyjne polskie ciasto świąteczne", answer: "makowiec", length: 7, row: 0, col: 2 },
+      { number: 3, clue: "Czerwony nos u renifera Rudolfa to efekt spożycia", answer: "piwo", length: 4, row: 0, col: 4 },
+      { number: 5, clue: "Świąteczny prezent, zazwyczaj pakowany w kolorowy papier", answer: "pakunek", length: 7, row: 0, col: 6 },
+      { number: 7, clue: "Znane słowo kojarzone ze świętami, oznacza radość i szczerą życzliwość", answer: "święta", length: 6, row: 0, col: 8 },
+      { number: 9, clue: "Święta Bożego Narodzenia obchodzone są w Polsce 24 i 25", answer: "grudzień", length: 8, row: 0, col: 10 },
+      { number: 11, clue: "Najważniejsza gwiazda świąt, pojawiająca się w nocy z 24 na 25 grudnia", answer: "betlejem", length: 8, row: 0, col: 12 }
+    ]
+  };
+
+  const crosswordContainer = document.getElementById('crossword');
+  const answerInput = document.getElementById('answerInput');
+  const result = document.getElementById('result');
+
+  function createCrossword() {
+    for (let i = 0; i < 12; i++) {
+      for (let j = 0; j < 15; j++) {
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+        cell.dataset.row = i;
+        cell.dataset.col = j;
+        crosswordContainer.appendChild(cell);
+
+        const isNumberedCell = crosswordData.across.some(entry => entry.row === i && entry.col === j) || crosswordData.down.some(entry => entry.row === i && entry.col === j);
+        if (isNumberedCell) {
+          cell.classList.add('numbered-cell');
+          const numberLabel = document.createElement('div');
+          numberLabel.classList.add('number-label');
+          numberLabel.textContent = getCellNumber(i, j);
+          cell.appendChild(numberLabel);
+        }
+      }
+    }
+
+    crosswordContainer.addEventListener('input', handleAnswerInput);
+  }
+
+  function getCellNumber(row, col) {
+    const acrossEntry = crosswordData.across.find(entry => entry.row === row && entry.col === col);
+    const downEntry = crosswordData.down.find(entry => entry.row === row && entry.col === col);
+
+    return acrossEntry ? acrossEntry.number : downEntry ? downEntry.number : '';
+  }
+
+  function handleAnswerInput(event) {
+    const input = event.target;
+    const inputValue = input.value.trim().toLowerCase();
+
+    const entry = findEntryByPosition(input.dataset.row, input.dataset.col);
+
+    if (entry && inputValue.length === entry.length) {
+      if (inputValue === entry.answer) {
+        input.classList.add('correct');
+      } else {
+        input.classList.add('incorrect');
+      }
+    }
+  }
+  User
+
+  function findEntryByPosition(row, col) {
+  const acrossEntry = crosswordData.across.find(entry => entry.row === parseInt(row) && entry.col === parseInt(col));
+  const downEntry = crosswordData.down.find(entry => entry.row === parseInt(row) && entry.col === parseInt(col));
+
+  return acrossEntry || downEntry;
+}
+
+function checkAllAnswers() {
+  const inputs = crosswordContainer.querySelectorAll('input');
+
+  inputs.forEach(input => {
+    const entry = findEntryByPosition(input.dataset.row, input.dataset.col);
+
+    if (entry) {
+      const inputValue = input.value.trim().toLowerCase();
+      if (inputValue === entry.answer) {
+        input.classList.add('correct');
+      } else {
+        input.classList.add('incorrect');
+      }
+    }
+  });
+
+  const correctInputs = crosswordContainer.querySelectorAll('.correct').length;
+  const totalInputs = crosswordContainer.querySelectorAll('.cell:not(.numbered-cell)').length;
+
+  if (correctInputs === totalInputs) {
+    result.textContent = 'Gratulacje! Krzyżówka została uzupełniona poprawnie.';
+  } else {
+    result.textContent = 'Nie wszystkie odpowiedzi są poprawne. Spróbuj ponownie.';
+  }
+}
+
+createCrossword();
+</script>
+
+</body>
+</html>

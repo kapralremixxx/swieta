@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kolęda 1</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff; /* białe tło */
+            color: #c00; /* czerwony kolor tekstu */
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: rgb(255, 255, 255); /* czerwone tło nagłówka */
+            padding: 1em;
+            text-align: center;
+        }
+        section {
+            padding: 1em;
+            display: flex;
+            flex-wrap: wrap; /* Dodanie zawijania do nowej linii dla elementów */
+            justify-content: center; /* Wyśrodkowanie elementów */
+            max-width: 800px; /* Maksymalna szerokość sekcji */
+            margin: 0 auto; /* Wyśrodkowanie sekcji */
+        }
+        .inner-text {
+            white-space: nowrap; /* Zapobiega zawijaniu tekstu na nową linię */
+            width: 100%; /* Szerokość tekstu */
+            margin-right: 20px; /* Dodatkowy odstęp od odtwarzacza */
+            box-sizing: border-box; /* Zapobiega przekraczaniu szerokości sekcji */
+        }
+        iframe {
+            width: 100%; /* Pełna szerokość odtwarzacza YouTube */
+            height: 315px; /* Wysokość odtwarzacza YouTube */
+            margin-top: 20px; /* Dodatkowy odstęp od tekstu */
+            box-sizing: border-box; /* Zapobiega przekraczaniu szerokości sekcji */
+        }
+        audio {
+            width: 100%; /* Pełna szerokość odtwarzacza audio */
+            margin-top: 20px;
+            box-sizing: border-box; /* Zapobiega przekraczaniu szerokości sekcji */
+        }
+        footer {
+            background-color: #c00; /* czerwone tło stopki */
+            padding: 1em;
+            text-align: center;
+            color: #fff; /* biały kolor tekstu w stopce */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Dzisiaj w Betlejem</h1>
+    </header>
+    <section>
+        <div class="inner-text">
+            Dzisiaj w Betlejem, dzisiaj w Betlejem wesoła nowina<br />
+            Że Panna czysta, że Panna czysta porodziła Syna<br />
+            Chrystus się rodzi, nas oswobodzi<br />
+            Anieli grają, króle witają<br />
+            Pasterze śpiewają, bydlęta klękają<br />
+            Cuda, cuda ogłaszają.<br />
+            Chrystus się rodzi, nas oswobodzi<br />
+            Anieli grają, króle witają<br />
+            Pasterze śpiewają, bydlęta klękają<br />
+            Cuda, cuda ogłaszają<br />
+            Maryja Panna, Maryja Panna Dzieciątko piastuje<br />
+            I Józef Święty, i Józef Święty ono pielęgnuje<br />
+            Chrystus się rodzi, nas oswobodzi<br />
+            Anieli grają, króle witają<br />
+            Pasterze śpiewają, bydlęta klękają<br />
+            Cuda, cuda ogłaszają.<br />
+            Chrystus się rodzi, nas oswobodzi<br />
+            Anieli grają, króle witają<br />
+            Pasterze śpiewają, bydlęta klękają<br />
+            Cuda, cuda ogłaszają<br />
+            Choć w stajeneczce, choć w stajeneczce Panna syna rodzi<br />
+            Przecież On wkrótce, przecież On wkrótce ludzi oswobodzi<br />
+            Chrystus się rodzi, nas oswobodzi<br />
+            Anieli grają, króle witają<br />
+            Pasterze śpiewają, bydlęta klękają<br />
+            Cuda, cuda ogłaszają.<br />
+            Chrystus się rodzi, nas oswobodzi<br />
+            Anieli grają, króle witają<br />
+            Pasterze śpiewają, bydlęta klękają<br />
+            Cuda, cuda ogłaszają
+        </div>
+        <iframe src="https://www.youtube.com/watch?v=0T21fPcpMmY&pp=ygUSRHppc2lhaiB3IEJldGxlamVt" frameborder="0" allowfullscreen></iframe>
+    </section>
+    <section>
+        <h2>Nagranie Audio</h2>
+
+        <audio controls>
+            <source src="Dzisiaj w Betlejem.mp3" type="audio/mp3">
+            Twoja przeglądarka nie obsługuje elementu audio.
+        </audio>
+    </section>
+    <footer>
+        <p>© 2023 Wesołe Święta</p>
+    </footer>
+</body>
+</html>
